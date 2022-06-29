@@ -8,7 +8,7 @@ import Admin from './components/Admin';
 import Home from './components/Home';
 import OneMovie from './components/OneMovie'
 
-export default function App() {
+const App = () => {
   return (
     <Router>
       <div className='container'>
@@ -56,10 +56,11 @@ export default function App() {
   );
 }
 
-function CategoryPage() {
-
+const CategoryPage = () => {
+  
   let params = useParams();
   console.log(params);
+  
   return (
     <div>
       <ul>
@@ -68,5 +69,7 @@ function CategoryPage() {
       </ul>
     </div>
   );
-
 }
+
+
+export default App();

@@ -1,10 +1,10 @@
-import React, { Component, PureComponent } from 'react';
+import React from 'react';
 
-export default class Categories extends Component{
+const Categories = () => {
 
-    render() {
-        return(
-            <h2>Category: {this.props.title}</h2>
-        );
-    }
+    return(
+        <h2>Category: {this.props.title}</h2>
+    );
 }
+
+export default Categories;

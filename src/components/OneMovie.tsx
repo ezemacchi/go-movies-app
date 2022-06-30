@@ -14,7 +14,7 @@ const OneMovie = () => {
             setMovie(
                 { id: Number(params.id), title: "Some Movie", runtime: 150 }
             )
-        }, 5000)
+        }, 1500)
     })
 
 

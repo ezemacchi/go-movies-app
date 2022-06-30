@@ -15,7 +15,7 @@ const Movies = () => {
                     { id: 3, title: 'The Dark Knight', runtime: 153 }
                 ]
             );
-        }, 5000)
+        }, 1500)
     })
 
     return (

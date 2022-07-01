@@ -1,13 +1,18 @@
-import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Movies from './components/Movies';
-import Admin from './components/Admin';
-import Home from './components/Home';
-import OneMovie from './components/OneMovie'
+import Admin from './pages/Admin';
+import OneCategory from './pages/OneCategory';
+import Categories from './pages/Categories';
+import Home from './pages/Home';
+import Movies from './pages/Movies';
+import OneMovie from './pages/OneMovie'
+import Error from './pages/Error';
+import Navbar from './components/Navbar';
 
 const App = () => {
+
   return (
     <Router>
       <div className='container'>
@@ -20,53 +25,32 @@ const App = () => {
         </div>
 
         <div className='row'>
-          <div className='col-md-2'>
-            <nav>
-              <ul className='list-group'>
-                <li className='list-group-item'>
-                  <Link to='/'>Home</Link>
-                </li>
-                <li className='list-group-item'>
-                  <Link to='/movies'>Movies</Link>
-                </li>
-                <li className='list-group-item'>
-                  <Link to='/by-category'>Categories</Link>
-                </li>
-                <li className='list-group-item'>
-                  <Link to='/admin'>Manage Catalogue</Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
+          <Navbar />
           <div className='col-md-10'>
             <Routes>
-              <Route path='/movies/:id' element={<OneMovie />} />
-              <Route path='/movies' element={<Movies />} />
-              <Route path='/by-category' element={<CategoryPage />} />
-              <Route path='/admin' element={<Admin />} />
-              <Route path='/' element={<Home />} />
+              <Route path='/' element={<Outlet />}>
+                <Route index element={<Home />} />
+                <Route path='admin' element={<Admin />} />
+
+                <Route path='movies' element={<Outlet />} >
+                  <Route index element={<Movies />} />
+                  <Route path=':id' element={<OneMovie />} />
+                </Route>
+
+                <Route path='by-category' element={<Outlet />} >
+                  <Route index element={<Categories />} />
+                  <Route path=':category' element={<OneCategory />} />
+                </Route>
+
+                <Route path='*' element={<Error />} />
+              </Route>
             </Routes>
           </div>
+
         </div>
 
       </div>
     </Router>
-  );
-}
-
-const CategoryPage = () => {
-
-  let params = useParams();
-  console.log(params);
-
-  return (
-    <div>
-      <ul>
-        <li><Link to={`${params}/comedy`}>Comedy</Link></li>
-        <li><Link to={`${params}/drama`}>Drama</Link></li>
-      </ul>
-    </div>
   );
 }
 

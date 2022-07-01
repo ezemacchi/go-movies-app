@@ -1,6 +1,6 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Movie from './../models/Movie';
+import Movie from '../models/Movie';
 
 const Movies = () => {
 
@@ -19,9 +19,8 @@ const Movies = () => {
     })
 
     return (
-        <Fragment>
-            <h2>Choose a movie</h2>
-
+        <>
+            <h2>Choose a movie</h2> 
             <ul>
                 {movies.map(m => (
                     <li key={m.id}>
@@ -29,7 +28,7 @@ const Movies = () => {
                     </li>
                 ))}
             </ul>
-        </Fragment>
+        </>
     );
 }
 

@@ -2,25 +2,49 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Movie from '../models/Movie';
 
+interface MoviesResponse {
+    movies: Movie[];
+}
+
+class MessageError {
+    message: string | undefined;
+}
+
 const Movies = () => {
 
     const [movies, setMovies] = useState<Movie[]>([]);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [error, setError] = useState<MessageError>();
 
     useEffect(() => {
-        setInterval(() => {
-            setMovies(
-                [
-                    { id: 1, title: 'The Shawshank Redemption', runtime: 142 },
-                    { id: 2, title: 'The Godfather', runtime: 175 },
-                    { id: 3, title: 'The Dark Knight', runtime: 153 }
-                ]
-            );
-        }, 1500)
-    })
+        fetch("http://localhost:4000/v1/movies")
+            .then(response => {
+                if (response.status !== 200) {
+                    let err = new MessageError();
+                    err.message = "Invales response code : " + response.status;
+                    setError(err);
+                }
+                return response.json()
+            })
+            .then((json: MoviesResponse) => {
+                setMovies(json.movies);
+                setIsLoaded(true);
+            }, err => {
+                setIsLoaded(true);
+                setError(err);
+            })
+    }, [])
 
+    if (!isLoaded) {
+        return <p>Loading...</p>
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>
+    }
     return (
         <>
-            <h2>Choose a movie</h2> 
+            <h2>Choose a movie</h2>
             <ul>
                 {movies.map(m => (
                     <li key={m.id}>

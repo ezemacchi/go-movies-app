@@ -25,7 +25,11 @@ const App = () => {
         </div>
 
         <div className='row'>
-          <Navbar />
+          
+          <nav className='col-md-2'>
+            <Navbar />
+          </nav>
+
           <div className='col-md-10'>
             <Routes>
               <Route path='/' element={<Outlet />}>

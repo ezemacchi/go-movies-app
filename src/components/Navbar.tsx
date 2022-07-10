@@ -11,7 +11,7 @@ const Navbar = () => {
                 <NavLink to='/movies'>Movies</NavLink>
             </li>
             <li className='list-group-item'>
-                <NavLink to='/by-category'>Categories</NavLink>
+                <NavLink to='/genres'>Genres</NavLink>
             </li>
             <li className='list-group-item'>
                 <NavLink to='/admin'>Manage Catalogue</NavLink>

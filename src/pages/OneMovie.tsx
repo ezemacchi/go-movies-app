@@ -1,9 +1,7 @@
-import { parse } from 'path';
 import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Movie from '../models/Movie';
-import Movies from './Movies';
 
 class MessageError {
     message: string | undefined;
@@ -11,10 +9,6 @@ class MessageError {
 
 interface OneMovieResponse {
     movie: Movie;
-}
-
-interface RouteParams {
-    id: number
 }
 
 const OneMovie = () => {
@@ -69,7 +63,7 @@ const OneMovie = () => {
             <div className="float-end">
                 {movie.genres.map((m, index) => (
                     <span className='badge bg-secondary me-1' key={index}>
-                        {m}
+                        {m.genreName}
                     </span>
                 ))}
             </div>
